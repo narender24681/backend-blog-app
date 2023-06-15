@@ -26,7 +26,17 @@ blogsRouter.post("/", auth, async (req, res) => {
 
 blogsRouter.get("/", async (req, res) => {
     try {
-        const posts = await BlogsModel.find();
+        let page = 8;
+
+        // if (page <= 0) {
+        //     page = 1;
+        // }
+        // if (page >= 1) {
+        //     page -= 1;
+        // }
+        console.log(page);
+
+        const posts = await BlogsModel.find().limit(5).skip(6);
         // console.log(posts);
 
         res.status(200).send(posts);
